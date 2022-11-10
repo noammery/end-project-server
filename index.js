@@ -5,6 +5,7 @@ const app = express();
 const cors = require(`cors`);
 const bodyParser = require(`body-parser`);
 require(`dotenv`).config();
+import benifitsRouter from './routes/benifitsRoutes.js';
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -16,6 +17,8 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(cors());
+
+app.use('/api/benifits', benifitsRouter);
 
 app.use(bodyParser.json());
 
