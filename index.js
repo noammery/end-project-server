@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./routes/authRouter')
 const eventRouter = require('./routes/eventRouter')
+const departAdminRouter = require('./routes/departAdminRouter')
 const { DB } = require("./config")
 const cors = require('cors');
 
@@ -17,6 +18,8 @@ app.use(express.json())
 app.use("/auth", authRouter)
 
 app.use("/add", eventRouter)
+
+app.use("/departments", departAdminRouter)
 
 const start = async () => {
     try {
