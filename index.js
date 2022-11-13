@@ -5,6 +5,8 @@ const eventRouter = require('./routes/eventRouter')
 const departAdminRouter = require('./routes/departAdminRouter')
 const { DB } = require("./config")
 const cors = require('cors');
+const benifitsRouter = require('./routes/bonusses')
+
 
 
 const PORT = 5000
@@ -20,6 +22,8 @@ app.use("/auth", authRouter)
 app.use("/add", eventRouter)
 
 app.use("/departments", departAdminRouter)
+
+app.use('/bonuses', benifitsRouter);
 
 const start = async () => {
     try {
