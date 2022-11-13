@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose')
 
 
 
@@ -8,10 +8,12 @@ const benifitsSchema = new mongoose.Schema(
       description: { type: String, required: true },
       image: { type: String, required: false },
       link: {type: String, required: false},
-      date: {type: mongoose.Date, required: true}
+      linkTitle: {type: String, require: false},
+      date: {type:Date, required: true}
     },
 )
 
 
 const Benifits = mongoose.model('Benifits', benifitsSchema);
-export default Benifits;
+
+module.exports = Benifits
