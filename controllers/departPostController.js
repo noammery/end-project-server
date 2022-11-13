@@ -1,4 +1,5 @@
-const DepartmentPosts = require('../models/DepartmentPosts');
+const DepartmentPost = require('../models/DepartmentPosts');
+const { validationResult } = require('express-validator')
 
 class DepartmentPostsController{
 
@@ -16,7 +17,7 @@ class DepartmentPostsController{
 
             return res.json({message:"post updated successfully"});
         
-        }catch {
+        }catch(e) {
             console.log(e);
             res.status(400).json({message:"posting error"})
         }
