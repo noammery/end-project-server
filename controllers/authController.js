@@ -81,4 +81,4 @@ class authController {
         }
     }
 }
-module.exports = new authController()
+module.exports = new authController()       
