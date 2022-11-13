@@ -2,10 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 const authRouter = require('./routes/authRouter')
 const eventRouter = require('./routes/eventRouter')
-const benifitsRouter = require('./routes/bonusses')
+const departAdminRouter = require('./routes/departAdminRouter')
 const { DB } = require("./config")
 const cors = require('cors');
-
+const benifitsRouter = require('./routes/bonusses')
 
 
 
@@ -20,6 +20,8 @@ app.use(express.json())
 app.use("/auth", authRouter)
 
 app.use("/add", eventRouter)
+
+app.use("/departments", departAdminRouter)
 
 app.use('/bonuses', benifitsRouter);
 
