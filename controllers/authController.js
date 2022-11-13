@@ -23,7 +23,7 @@ class authController {
                 return res.status(400).json({ message: "Registration error", errors })
             }
 
-            const { username, password } = req.body
+            const { username, password, role, image, fullname, email, phone, birthday, department, status, sex } = req.body
             const candidate = await User.findOne({ username })
 
             if (candidate) {
@@ -31,8 +31,7 @@ class authController {
             }
 
             const hashPassword = bcrypt.hashSync(password, 7)
-            const userRole = await Role.findOne({ value: "USER" })
-            const user = new User({ username, password: hashPassword, role: userRole.value })
+            const user = new User({ username, password: hashPassword, role, image, fullname, email, phone, birthday, department, status, sex  })
             await user.save()
             
             return res.json({ message: "User registered successfully" })
@@ -45,11 +44,11 @@ class authController {
 
     async login(req, res) {
         try {
-            const { username, password } = req.body
-            const user = await User.findOne({ username })
+            const { mail, password } = req.body
+            const user = await User.findOne({ mail })
 
             if (!user) {
-                return res.status(400).json({ message: `User ${username} not found` })
+                return res.status(400).json({ message: `User ${mail} not found` })
             }
 
             const validPassword = bcrypt.compareSync(password, user.password)
@@ -58,7 +57,8 @@ class authController {
                 return res.status(400).json({ message: `Invalid password` })
             }
             const token = generateAccessToken(user._id, user.role)
-            return res.json({ token })
+            const {role, image, fullname, email, phone, birthday, department, status, sex} = user
+            return res.json({ token, role, image, fullname, email, phone, birthday, department, status, sex })
 
         } catch (e) {
             console.log(e);
@@ -66,13 +66,16 @@ class authController {
         }
     }
     async getUsers(req, res) {
+        const sent = {}
         try {
             const users = await User.find()
+
             res.json(users)
         } catch (e) {
             console.log(e);
         }
     }
+
     async makeAdmin(req, res){
         try {
             

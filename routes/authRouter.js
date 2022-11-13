@@ -7,7 +7,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
 
 
 router.post('/registration', [
-    check('username', "can not be empty").notEmpty(),
+    check('email', "can not be empty").notEmpty().isEmail(),
     check('password', "need to be 4-10 symbols").isLength({min:4, max:10})
 ], controller.registration)
 
