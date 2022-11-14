@@ -1,4 +1,3 @@
-
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRouter");
@@ -9,9 +8,8 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { DB } = require("./config");
 const cors = require("cors");
-const benifitsRouter = require('./routes/bonusses')
+const benifitsRouter = require("./routes/bonusses");
 const PORT = 5000;
-
 
 app.use(cors());
 
@@ -36,7 +34,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send", (message) => {
-    console.log(message);
     socket.to("1").emit("back", message);
   });
 
@@ -51,7 +48,7 @@ app.use("/add", eventRouter);
 
 app.use("/departments", departAdminRouter);
 
-app.use('/bonuses', benifitsRouter);
+app.use("/bonuses", benifitsRouter);
 
 const start = async () => {
   try {
