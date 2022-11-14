@@ -1,3 +1,4 @@
+
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRouter");
@@ -8,8 +9,9 @@ const http = require("http");
 const { Server } = require("socket.io");
 const { DB } = require("./config");
 const cors = require("cors");
-
+const benifitsRouter = require('./routes/bonusses')
 const PORT = 5000;
+
 
 app.use(cors());
 
@@ -48,6 +50,8 @@ app.use("/auth", authRouter);
 app.use("/add", eventRouter);
 
 app.use("/departments", departAdminRouter);
+
+app.use('/bonuses', benifitsRouter);
 
 const start = async () => {
   try {
