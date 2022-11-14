@@ -8,7 +8,7 @@ const benifitsSchema = new mongoose.Schema(
       description: { type: String, required: true },
       image: { type: String, required: false },
       link: {type: String, required: false},
-      linkTitle: {type: String, require: false},
+      linktitle: {type: String, require: false},
       date: {type:Date, required: true}
     },
 )
