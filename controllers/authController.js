@@ -114,7 +114,7 @@ class authController {
   async updateStatus(req, res) {
     try {
       await User.findOneAndUpdate(
-        { fullname: req.body.fullname },
+        { email: req.body.email },
         { status: req.body.status },
         {
           returnOriginal: false,
@@ -126,7 +126,7 @@ class authController {
   }
   async findTheUser(req, res) {
     try {
-      const user = await User.findOne({ fullname: req.body.fullname });
+      const user = await User.findOne({ email: req.body.email });
       const sentUser = {
         role: user.role,
         fullname: user.fullname,
@@ -141,6 +141,21 @@ class authController {
         email: user.email,
       };
       res.json(sentUser);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async findUserByDepartment(req, res) {
+    let userList = [];
+    try {
+      const user = await User.find({ department: req.body.department });
+      for (let i = 0; i < user.length; i++) {
+        const updatedUser = { fullname: "", image: "" }
+        updatedUser.fullname = user[i].fullname
+        updatedUser.image = user[i].image
+        userList.push(updatedUser)
+      }
+      res.json(userList);
     } catch (e) {
       console.log(e);
     }
