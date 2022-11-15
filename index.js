@@ -10,6 +10,7 @@ const { DB } = require("./config");
 const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
 const PORT = 5000;
+const addEventCalendarRouter = require("./routes/addEventCalendarRouter")
 
 app.use(cors());
 
@@ -49,6 +50,8 @@ app.use("/add", eventRouter);
 app.use("/departments", departAdminRouter);
 
 app.use("/bonuses", benifitsRouter);
+
+
 
 const start = async () => {
   try {
