@@ -6,12 +6,15 @@ const departAdminRouter = require("./routes/departAdminRouter");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
-const { DB } = require("./config");
+const { DB , cloudName , apiKey , apiSecret } = require("./config");
+
 const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
 const PORT = 5000;
 
+
 app.use(cors());
+// const cloudinary = require("./cloudinary/cloudinary")
 
 app.use(express.json());
 
