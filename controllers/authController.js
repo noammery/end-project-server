@@ -114,7 +114,7 @@ class authController {
   async updateStatus(req, res) {
     try {
       await User.findOneAndUpdate(
-        { fullname: req.body.fullname },
+        { email: req.body.email },
         { status: req.body.status },
         {
           returnOriginal: false,
@@ -126,7 +126,7 @@ class authController {
   }
   async findTheUser(req, res) {
     try {
-      const user = await User.findOne({ fullname: req.body.fullname });
+      const user = await User.findOne({ email: req.body.email });
       const sentUser = {
         role: user.role,
         fullname: user.fullname,
