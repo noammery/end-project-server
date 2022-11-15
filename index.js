@@ -26,11 +26,11 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  console.log(`user ${socket.id} connected`);
+  // console.log(`user ${socket.id} connected`);
 
   socket.on("join_room", () => {
     socket.join("1");
-    console.log(`user${socket.id} joinned room 1`);
+    // console.log(`user${socket.id} joinned room 1`);
   });
 
   socket.on("send", (message) => {
@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on(`disconnect`, () => {
-    console.log(`User  ${socket.id} disconnect`);
+    // console.log(`User  ${socket.id} disconnect`);
   });
 });
 
