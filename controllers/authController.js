@@ -4,12 +4,13 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // const { validationResult } = require('express-validator')
 const { secret } = require("../config");
+const { remove } = require("../models/User");
 
 const generateAccessToken = (id, role, fullname) => {
   const payload = {
     id,
     role,
-    fullname
+    fullname,
   };
   return jwt.sign(payload, secret, { expiresIn: "24h" });
 };
@@ -81,32 +82,65 @@ class authController {
       }
       const token = generateAccessToken(user.email, user.role, user.fullname);
 
-    //   const {
-    //     role,
-    //     fullname,
-    //     phone,
-    //     birthday,
-    //     department,
-    //     sex,
-    //     image,
-    //     contract,
-    //     adress,
-    //   } = user;
+      //   const {
+      //     role,
+      //     fullname,
+      //     phone,
+      //     birthday,
+      //     department,
+      //     sex,
+      //     image,
+      //     contract,
+      //     adress,
+      //   } = user;
 
       return res.json({
-        token
+        token,
       });
-      
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Login error" });
     }
   }
-  async getUsers( res) {
+  async getUsers(res) {
     try {
       const users = await User.find();
 
       res.json(users);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async updateStatus(req, res) {
+    try {
+      await User.findOneAndUpdate(
+        { fullname: req.body.fullname },
+        { status: req.body.status },
+        {
+          returnOriginal: false,
+        }
+      ).then(res.json("updated"));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  async findTheUser(req, res) {
+    try {
+      const user = await User.findOne({ fullname: req.body.fullname });
+      const sentUser = {
+        role: user.role,
+        fullname: user.fullname,
+        phone: user.phone,
+        birthday: user.birthday,
+        department: user.department,
+        sex: user.sex,
+        image: user.image,
+        contract: user.contract,
+        adress: user.adress,
+        status: user.status,
+        email: user.email,
+      };
+      res.json(sentUser);
     } catch (e) {
       console.log(e);
     }
