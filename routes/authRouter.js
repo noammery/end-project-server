@@ -22,6 +22,8 @@ router.post("/status", controller.updateStatus);
 
 router.post("/findUser", controller.findTheUser);
 
+router.post("/userbydepartment", controller.findUserByDepartment);
+
 // router.put('/makeadmin/:username', authMiddleware, controller.makeAdmin)
 
 module.exports = router;
