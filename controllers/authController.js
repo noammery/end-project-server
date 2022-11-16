@@ -150,10 +150,11 @@ class authController {
     try {
       const user = await User.find({ department: req.body.department });
       for (let i = 0; i < user.length; i++) {
-        const updatedUser = { fullname: "", image: "" }
-        updatedUser.fullname = user[i].fullname
-        updatedUser.image = user[i].image
-        userList.push(updatedUser)
+        const updatedUser = { fullname: "", image: "" };
+        updatedUser.fullname = user[i].fullname;
+        updatedUser.image = user[i].image;
+        updatedUser.email = user[i].email;
+        userList.push(updatedUser);
       }
       res.json(userList);
     } catch (e) {
