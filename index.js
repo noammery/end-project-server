@@ -11,6 +11,8 @@ const { DB } = require("./config");
 const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
 const PORT = 5000;
+const User = require("./models/User");
+
 
 app.use(cors());
 
@@ -57,6 +59,8 @@ const start = async () => {
   try {
     await mongoose.connect(DB);
     server.listen(PORT, () => console.log(`server started on port ${PORT}`));
+    const query = await User.distinct('email');
+    console.log(query);
   } catch (e) {
     console.log(e);
   }
