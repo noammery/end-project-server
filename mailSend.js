@@ -1,7 +1,9 @@
-const { SENDGRID_API_KEY } = require("./config");
+// const { SENDGRID_API_KEY } = require("./config");
+require('dotenv').config()
+
 const sgMail = require('@sendgrid/mail')
 
-sgMail.setApiKey(SENDGRID_API_KEY)
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 const msg = {
   to: ['oleg.bragin.01@gmail.com','baxi585@gmail.com'], // Change to your recipient
   from: 'dimonaWorkersSite@gmail.com', // Change to your verified sender

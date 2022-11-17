@@ -7,7 +7,8 @@ const DepartmentNameRouter = require("./routes/DepartmentNameRouter");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
-const { DB } = require("./config");
+require('dotenv').config()
+
 const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
 const PORT = 5000;
@@ -57,7 +58,7 @@ app.use("/bonuses", benifitsRouter);
 
 const start = async () => {
   try {
-    await mongoose.connect(DB);
+    await mongoose.connect(process.env.DB);
     server.listen(PORT, () => console.log(`server started on port ${PORT}`));
     const query = await User.distinct('email');
     console.log(query);

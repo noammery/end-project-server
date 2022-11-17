@@ -3,16 +3,16 @@ const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 // const { validationResult } = require('express-validator')
-const { secret } = require("../config");
-const { remove } = require("../models/User");
+require('dotenv').config()
 
+process.env.SECRET
 const generateAccessToken = (id, role, fullname) => {
   const payload = {
     id,
     role,
     fullname,
   };
-  return jwt.sign(payload, secret, { expiresIn: "24h" });
+  return jwt.sign(payload, process.env.SECRET, { expiresIn: "24h" });
 };
 
 class authController {
