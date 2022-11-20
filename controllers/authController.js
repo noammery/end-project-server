@@ -118,7 +118,7 @@ class authController {
     try {
       const users = await User.find();
 
-      res.json(users);
+      await res.json(users);
     } catch (e) {
       console.log(e);
     }
