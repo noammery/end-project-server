@@ -10,14 +10,15 @@ benifitsRouter.post("/get", async (req, res) => {
 
 benifitsRouter.post("/update", (req, res, next) => {
   req.body.title &&
-  req.body.description &&
-  req.body.image &&
-  req.body.link &&
-  req.body.linktitle
+    req.body.description &&
+    req.body.image &&
+    req.body.link &&
+    req.body.date &&
+    req.body.linktitle
     ? Benifits.create(req.body)
-        .then((data) => res.json(data))
-        .catch(next)
-    : res.json({ error: "you have an error" });
+      .then((data) => res.json(data))
+      .catch(next)
+    : res.json({ error: "you have an error!!" });
 });
 
 benifitsRouter.delete("/delete/:title", (req, res, next) => {
