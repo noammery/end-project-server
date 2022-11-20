@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRouter = require("./routes/authRouter");
-const eventRouter = require("./routes/eventRouter");
 const departAdminRouter = require("./routes/departAdminRouter");
 const DepartmentNameRouter = require("./routes/DepartmentNameRouter");
 const app = express();
@@ -48,7 +47,7 @@ io.on("connection", (socket) => {
 
 app.use("/auth", authRouter);
 
-app.use("/add", eventRouter);
+// app.use("/add", eventRouter);
 
 app.use("/name", DepartmentNameRouter);
 

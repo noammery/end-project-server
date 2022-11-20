@@ -2,7 +2,7 @@ const User = require("../models/User");
 const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator')
 require('dotenv').config()
 
 process.env.SECRET
@@ -18,11 +18,11 @@ const generateAccessToken = (id, role, fullname) => {
 class authController {
   async registration(req, res) {
     try {
-      // const errors = validationResult(req)
+      const errors = validationResult(req)
 
-      // if (!errors.isEmpty()) {
-      //     return res.status(400).json({ message: "Validation error", errors })
-      // }
+      if (!errors.isEmpty()) {
+          return res.status(400).json({ message: "Validation error", errors })
+      }
       console.log(req.body);
       const {
         email,
