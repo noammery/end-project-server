@@ -1,6 +1,3 @@
-const Contact = require('../models/Contact')
-const Event = require('../models/Event')
-const Social = require('../models/Social')
 
 class eventController {
     async postEvent(req, res) {

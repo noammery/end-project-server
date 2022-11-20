@@ -17,5 +17,3 @@ router.get('/social', authMiddleware, controller.getSocials)
 router.post('/contact', authMiddleware, controller.postContact)
 
 router.get('/contact', authMiddleware, controller.getContacts)
-
-module.exports = router

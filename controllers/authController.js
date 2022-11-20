@@ -1,8 +1,9 @@
 const User = require("../models/User");
-const Role = require("../models/Role");
+// const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { validationResult } = require('express-validator')
+const DepartmentName = require("../models/DepartmentName");
+// const { validationResult } = require('express-validator')
 require('dotenv').config()
 
 process.env.SECRET
@@ -21,7 +22,7 @@ class authController {
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
-          return res.status(400).json({ message: "Validation error", errors })
+        return res.status(400).json({ message: "Validation error", errors })
       }
       console.log(req.body);
       const {
@@ -38,10 +39,11 @@ class authController {
         adress,
       } = req.body;
       const candidate = await User.findOne({ email });
-
-      if (candidate) {
-        return res.status(400).json({ message: "User already exists" });
+      const departmentExist = await DepartmentName.findOne({ department });
+      if (candidate || !departmentExist) {
+        return res.status(400).json({ message: "User already exists or department not exist" });
       }
+
 
       const hashPassword = bcrypt.hashSync(password, 7);
       const user = new User({
@@ -50,7 +52,7 @@ class authController {
         role,
         fullname,
         phone,
-        birthday: new Date(),
+        birthday,
         department,
         sex,
         image,
@@ -63,6 +65,16 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration error" });
+    }
+  }
+
+  async deleteUser(req, res) {
+    try {
+      User.findOneAndDelete({ fullname: req.params.fullname })
+        .then((data) => res.json(data))
+    } catch {
+      console.log(e);
+      res.status(400).json({ message: "error!" });
     }
   }
 
