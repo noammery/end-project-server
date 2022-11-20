@@ -19,7 +19,6 @@ class DepartmentPostsController {
         description,
         date,
         image,
-        publish
       });
       await newPost.save();
 

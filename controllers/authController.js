@@ -19,11 +19,11 @@ const generateAccessToken = (id, role, fullname) => {
 class authController {
   async registration(req, res) {
     try {
-      // const errors = validationResult(req)
+      const errors = validationResult(req)
 
-      // if (!errors.isEmpty()) {
-      //     return res.status(400).json({ message: "Validation error", errors })
-      // }
+      if (!errors.isEmpty()) {
+        return res.status(400).json({ message: "Validation error", errors })
+      }
       console.log(req.body);
       const {
         email,
@@ -43,6 +43,7 @@ class authController {
       if (candidate || !departmentExist) {
         return res.status(400).json({ message: "User already exists or department not exist" });
       }
+
 
       const hashPassword = bcrypt.hashSync(password, 7);
       const user = new User({
@@ -64,6 +65,16 @@ class authController {
     } catch (e) {
       console.log(e);
       res.status(400).json({ message: "Registration error" });
+    }
+  }
+
+  async deleteUser(req, res) {
+    try {
+      User.findOneAndDelete({ fullname: req.params.fullname })
+        .then((data) => res.json(data))
+    } catch {
+      console.log(e);
+      res.status(400).json({ message: "error!" });
     }
   }
 
