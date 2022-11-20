@@ -60,8 +60,6 @@ const start = async () => {
   try {
     await mongoose.connect(process.env.DB);
     server.listen(PORT, () => console.log(`server started on port ${PORT}`));
-    const query = await User.distinct('email');
-    console.log(query);
   } catch (e) {
     console.log(e);
   }
