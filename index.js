@@ -10,7 +10,7 @@ require('dotenv').config()
 
 const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const User = require("./models/User");
 
 
