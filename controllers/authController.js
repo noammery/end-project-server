@@ -114,12 +114,11 @@ class authController {
       res.status(400).json({ message: "Login error" });
     }
   }
-  async getUsers(res) {
+  async getUsers(req, res) {
     try {
       const users = await User.find();
+      res.json(users)
 
-      const data = res.json(users);
-      return data
     } catch (e) {
       console.log(e);
     }
