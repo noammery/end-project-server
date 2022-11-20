@@ -6,7 +6,8 @@ const departmentPostSchema = new mongoose.Schema({
     title: { type: String, require: true },
     description: { type: String, require: true },
     date: { type: String, require: true },
-    image: { type: String, require: false }
+    image: { type: String, require: true },
+    publish:{type: Boolean, require: true}
 })
 
 

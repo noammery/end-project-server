@@ -1,7 +1,8 @@
 const User = require("../models/User");
-const Role = require("../models/Role");
+// const Role = require("../models/Role");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const DepartmentName = require("../models/DepartmentName");
 // const { validationResult } = require('express-validator')
 require('dotenv').config()
 
@@ -38,9 +39,9 @@ class authController {
         adress,
       } = req.body;
       const candidate = await User.findOne({ email });
-
-      if (candidate) {
-        return res.status(400).json({ message: "User already exists" });
+      const departmentExist = await DepartmentName.findOne({ department });
+      if (candidate || !departmentExist) {
+        return res.status(400).json({ message: "User already exists or department not exist" });
       }
 
       const hashPassword = bcrypt.hashSync(password, 7);
@@ -50,7 +51,7 @@ class authController {
         role,
         fullname,
         phone,
-        birthday: new Date(),
+        birthday,
         department,
         sex,
         image,
