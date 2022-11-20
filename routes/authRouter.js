@@ -22,7 +22,9 @@ router.post(
 );
 
 router.delete("/delete/:fullname",
-[check("title", "cant be empty").notEmpty()]
+[
+  check("fullname", "cant be empty").notEmpty()
+]
 ,controller.deleteUser)
 
 router.post(
