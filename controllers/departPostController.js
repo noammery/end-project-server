@@ -42,6 +42,7 @@ class DepartmentPostsController {
       res.status(400).json({ message: "error" });
     }
   }
+  
   async getSpecificPosts(req, res) {
     try {
       const specificDepartmentPost = await DepartmentPost.find({
