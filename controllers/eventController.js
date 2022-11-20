@@ -10,7 +10,7 @@ class eventController {
             await event.save()
             return res.json({ message: "Event posted successfully" })
         } catch (e) {
-            console.log(e);
+            console.log("arror!!111!!!");
         }
     }
     async getEvents(req, res) {
