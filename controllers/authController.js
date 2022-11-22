@@ -67,12 +67,14 @@ class authController {
   }
 
   async deleteUser(req, res) {
+
     const trying = await User.findOneAndDelete({
-      fullname: req.params.fullname,
+      email: req.params.email
     });
     trying
       ? res.json({ message: "משתמש נמחק בהצלחה" })
       : res.status(400).json({ message: "שגיאה!" });
+
   }
 
   async login(req, res) {
