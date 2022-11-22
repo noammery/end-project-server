@@ -21,9 +21,9 @@ router.post(
   controller.registration
 );
 
-router.delete("/delete/:fullname",
+router.delete("/delete/:email",
 [
-  check("fullname", "cant be empty").notEmpty()
+  check(" email", "cant be empty").notEmpty()
 ]
 ,controller.deleteUser)
 
