@@ -25,4 +25,4 @@ This is the server side repository. [to the client repository](https://github.co
 * express
 * mongoose
 * nodemon
-* socket.IO
+* socket.io
