@@ -70,7 +70,7 @@ class authController {
 
   async deleteUser(req, res) {
     try {
-      User.findOneAndDelete({ fullname: req.params.fullname })
+      User.findOneAndDelete({ email: req.params.email })
         .then((data) => res.json(data))
     } catch {
       console.log(e);
