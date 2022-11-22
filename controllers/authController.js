@@ -3,7 +3,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const DepartmentName = require("../models/DepartmentName");
-// const { validationResult } = require('express-validator')
+const { validationResult } = require('express-validator')
 require('dotenv').config()
 
 process.env.SECRET
