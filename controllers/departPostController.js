@@ -1,7 +1,7 @@
 const DepartmentPost = require("../models/DepartmentPosts");
 const { validationResult } = require("express-validator");
-require('dotenv').config()
-const sgMail = require('@sendgrid/mail')
+require("dotenv").config();
+const sgMail = require("@sendgrid/mail");
 
 class DepartmentPostsController {
   async createPost(req, res) {
@@ -9,7 +9,7 @@ class DepartmentPostsController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "creating post error", error });
+        return res.status(400).json({ message: "שגיאה ביצירת הפוסט", error });
       }
 
       const { department, title, description, date, image, publish } = req.body;
@@ -22,15 +22,14 @@ class DepartmentPostsController {
       });
       await newPost.save();
 
-
       if (publish) {
         // const query = await User.distinct('email');
-        sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY);
         const msg = {
-          to: ['oleg.bragin.01@gmail.com', 'baxi585@gmail.com'], // Change to your recipient
-          from: 'dimonaWorkersSite@gmail.com', // Change to your verified sender
-          templateId: 'd-9d56dbe7304040858371bb8495de7705',
-        }
+          to: ["oleg.bragin.01@gmail.com", "baxi585@gmail.com"], // Change to your recipient
+          from: "dimonaWorkersSite@gmail.com", // Change to your verified sender
+          templateId: "d-9d56dbe7304040858371bb8495de7705",
+        };
         // sgMail
         //   .send(msg)
         //   .then(() => {
@@ -40,10 +39,10 @@ class DepartmentPostsController {
         //     console.error(error)
         //   })
       }
-      return res.json({ message: "post updated successfully" });
+      return res.json({ message: "פוסט נוצר בהצלחה" });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "posting error" });
+      res.status(400).json({ message: "שגיאה" });
     }
   }
 
@@ -52,17 +51,17 @@ class DepartmentPostsController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "error!", error });
+        return res.status(400).json({ message: "שגיאה!", error });
       }
 
       const departmentPost = await DepartmentPost.find();
       res.send(departmentPost);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "error" });
+      res.status(400).json({ message: "שגיאה" });
     }
   }
-  
+
   async getSpecificPosts(req, res) {
     try {
       const specificDepartmentPost = await DepartmentPost.find({
@@ -71,18 +70,18 @@ class DepartmentPostsController {
       res.send(specificDepartmentPost);
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "error" });
+      res.status(400).json({ message: "שגיאה" });
     }
   }
 
   async deletepost(req, res) {
     try {
       DepartmentPost.findOneAndDelete({ title: req.params.title }).then(
-        (data) => res.json(data)
+        res.json({ message: "פוסט נמחק בהצלחה!" })
       );
     } catch {
       console.log(e);
-      res.status(400).json({ message: "error" });
+      res.status(400).json({ message: "שגיאה" });
     }
   }
 }

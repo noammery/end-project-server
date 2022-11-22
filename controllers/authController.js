@@ -3,10 +3,10 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const DepartmentName = require("../models/DepartmentName");
-const { validationResult } = require('express-validator')
-require('dotenv').config()
+const { validationResult } = require("express-validator");
+require("dotenv").config();
 
-process.env.SECRET
+process.env.SECRET;
 const generateAccessToken = (id, role, fullname) => {
   const payload = {
     id,
@@ -19,12 +19,11 @@ const generateAccessToken = (id, role, fullname) => {
 class authController {
   async registration(req, res) {
     try {
-      const errors = validationResult(req)
+      const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "Validation error", errors })
+        return res.status(400).json({ message: "שגיאה בזיהוי", errors });
       }
-      console.log(req.body);
       const {
         email,
         password,
@@ -41,9 +40,8 @@ class authController {
       const candidate = await User.findOne({ email });
       const departmentExist = await DepartmentName.findOne({ department });
       if (candidate || !departmentExist) {
-        return res.status(400).json({ message: "User already exists or department not exist" });
+        return res.status(400).json({ message: "משתמש קיים או אגף לא קיים" });
       }
-
 
       const hashPassword = bcrypt.hashSync(password, 7);
       const user = new User({
@@ -61,21 +59,22 @@ class authController {
       });
       await user.save();
 
-      return res.json({ message: "User registered successfully" });
+      return res.json({ message: "משתמש נוצר בהצלחה" });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Registration error" });
+      res.status(400).json({ message: "שגיאה ביצירת משתמש" });
     }
   }
 
   async deleteUser(req, res) {
-    try {
-      User.findOneAndDelete({ email: req.params.email })
-        .then((data) => res.json(data))
-    } catch {
-      console.log(e);
-      res.status(400).json({ message: "error!" });
-    }
+
+    const trying = await User.findOneAndDelete({
+      email: req.params.email
+    });
+    trying
+      ? res.json({ message: "משתמש נמחק בהצלחה" })
+      : res.status(400).json({ message: "שגיאה!" });
+
   }
 
   async login(req, res) {
@@ -90,7 +89,7 @@ class authController {
       const validPassword = bcrypt.compareSync(password, user.password);
 
       if (!validPassword) {
-        return res.status(400).json({ message: `Invalid password` });
+        return res.status(400).json({ message: `סיסמא שגוייה` });
       }
       const token = generateAccessToken(user.email, user.role, user.fullname);
 
@@ -111,14 +110,13 @@ class authController {
       });
     } catch (e) {
       console.log(e);
-      res.status(400).json({ message: "Login error" });
+      res.status(400).json({ message: "שגיאת התחברות!" });
     }
   }
   async getUsers(req, res) {
     try {
       const users = await User.find();
-      res.json(users)
-
+      res.json(users);
     } catch (e) {
       console.log(e);
     }
@@ -131,7 +129,7 @@ class authController {
         {
           returnOriginal: false,
         }
-      ).then(res.json("updated"));
+      ).then(res.json("עודכן"));
     } catch (e) {
       console.log(e);
     }

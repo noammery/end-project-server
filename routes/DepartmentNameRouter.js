@@ -4,16 +4,13 @@ const DepartmentName = require("../models/DepartmentName");
 
 router.post("/setname", async (req, res) => {
   const { theName } = req.body;
-
-  try {
-    const newName = new DepartmentName({
-      theName,
-    });
-    await newName.save();
-    res.json("New Department Added");
-  } catch (err) {
-    res.json(err);
-  }
+  const newName = new DepartmentName({
+    theName,
+  });
+  await newName.save();
+  newName
+    ? res.json({ message: "אגף חדש נוצר" })
+    : res.json({ message: "שגיאה" });
 });
 
 router.post("/getnames", async (req, res) => {
@@ -26,14 +23,12 @@ router.post("/getnames", async (req, res) => {
 });
 
 router.delete("/deletename", async (req, res) => {
-  try {
-    const deletedDepartment = await DepartmentName.deleteOne({
-      theName: req.body.theName,
-    });
-    res.json(deletedDepartment);
-  } catch (err) {
-    res.json(err);
-  }
+  const deletedDepartment = await DepartmentName.deleteOne({
+    theName: req.body.theName,
+  });
+  deletedDepartment.deletedCount !== 0
+    ? res.json({ message: "אגף נמחק בהצלחה" })
+    : res.json({ message: "שגיאה" });
 });
 
 module.exports = router;
