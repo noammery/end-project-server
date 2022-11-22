@@ -67,14 +67,12 @@ class authController {
   }
 
   async deleteUser(req, res) {
-
     const trying = await User.findOneAndDelete({
-      email: req.params.email
+      email: req.params.email,
     });
     trying
       ? res.json({ message: "משתמש נמחק בהצלחה" })
       : res.status(400).json({ message: "שגיאה!" });
-
   }
 
   async login(req, res) {
@@ -170,6 +168,22 @@ class authController {
     } catch (e) {
       console.log(e);
     }
+  }
+
+  async updateSpeech(req, res) {
+    const theSpeech = req.body.speech;
+    const speech = await User.findOneAndUpdate(
+      {
+        email: "superadmin@gmail.com",
+      },
+      { speech: theSpeech },
+      {
+        returnOriginal: false,
+      }
+    );
+    speech.speech === theSpeech
+      ? res.json({ message: "דבר ראש העיר עודכן בהצלחה!" })
+      : res.json({ message: "שגיאה!" });
   }
 
   async makeAdmin(req, res) {
