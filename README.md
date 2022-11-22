@@ -7,7 +7,10 @@ This is the server side repository. [to the client repository](https://github.co
 
  
 ## Table of content
-
+- [dimona emloyee site](#dimona-emloyee-site)
+  - [Running the project](#running-the-project)
+  - [Screenshot](#screenshot)
+  - [Technologies](#technologies)
 
 ## Running the project
 1. Clone the repo.
@@ -17,6 +20,8 @@ This is the server side repository. [to the client repository](https://github.co
 
 
 ## Screenshot
+ <p align="center"><img src="https://github.com/noammery/end-project-client/blob/master/src/images/screenshot.png" width="300" /></p>
+
 
 ## Technologies:
 * NodeJS
