@@ -5,6 +5,8 @@ This site was created as the final project in our fullstack course.
 
 This is the server side repository. [to the client repository](https://github.com/noammery/end-project-client)
 
+[to the deployed site](https://dimona-end-project.netlify.app/)
+
  
 ## Table of content
 - [dimona emloyee site](#dimona-emloyee-site)
@@ -28,6 +30,8 @@ This is the server side repository. [to the client repository](https://github.co
 * JWT
 * bcryptjs
 * express
+* express-validator
 * mongoose
 * nodemon
+* dotenv
 * socket.io
