@@ -7,28 +7,10 @@ const authMiddleware = require("../middlewares/authMiddleware");
 
 
 
-router.post("/get", async (req, res) => {
-  const benifits = await Benifits.find();
-  res.send(benifits);
-});
+router.post("/get", controller.getBonuses);
 
-router.post("/update", (req, res, next) => {
-  req.body.title &&
-    req.body.description &&
-    req.body.image &&
-    req.body.link &&
-    req.body.date &&
-    req.body.linktitle
-    ? Benifits.create(req.body)
-      .then((data) => res.json(data))
-      .catch(next)
-    : res.json({ error: "you have an error!!" });
-});
+router.post("/update", controller.createBonus);
 
-router.delete("/delete/:title", (req, res, next) => {
-  Benifits.findOneAndDelete({ title: req.params.title })
-    .then((data) => res.json(data))
-    .catch(next);
-});
+router.delete("/delete/:title", controller.deleteBonus);
 
 module.exports = router;
