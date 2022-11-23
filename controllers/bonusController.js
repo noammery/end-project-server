@@ -1,4 +1,4 @@
-const Benifits = require("../models/Benifits.js");
+const Benifits = require("../models/Benefits");
 // const { validationResult } = require('express-validator')
 require('dotenv').config()
 
