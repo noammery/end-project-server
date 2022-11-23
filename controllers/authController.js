@@ -6,7 +6,6 @@ const DepartmentName = require("../models/DepartmentName");
 const { validationResult } = require("express-validator");
 require("dotenv").config();
 
-process.env.SECRET;
 const generateAccessToken = (id, role, fullname) => {
   const payload = {
     id,
@@ -24,6 +23,7 @@ class authController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "שגיאה בזיהוי", errors });
       }
+      // console.log(req.body);
       const {
         email,
         password,
@@ -90,18 +90,6 @@ class authController {
         return res.status(400).json({ message: `סיסמא שגוייה` });
       }
       const token = generateAccessToken(user.email, user.role, user.fullname);
-
-      //   const {
-      //     role,
-      //     fullname,
-      //     phone,
-      //     birthday,
-      //     department,
-      //     sex,
-      //     image,
-      //     contract,
-      //     adress,
-      //   } = user;
 
       return res.json({
         token,

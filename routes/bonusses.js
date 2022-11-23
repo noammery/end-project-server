@@ -1,7 +1,7 @@
-const Benifits = require("../models/bonusses.js");
 const express = require("express");
-
 const benifitsRouter = express.Router();
+
+const Benifits = require("../models/Benefits");
 
 benifitsRouter.post("/get", async (req, res) => {
   const benifits = await Benifits.find();

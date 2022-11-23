@@ -10,8 +10,8 @@ module.exports = function (req, res, next) {
     if (!token) {
       return res.status(403).json({ message: "משתמש לא מורשה" });
     }
-    const decodedData = jwt.verify(token, process.env.SECRET);
-    req.user = decodedData;
+    jwt.verify(token, process.env.SECRET);
+    
     next();
   } catch (e) {
     console.log(e);
