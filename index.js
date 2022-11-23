@@ -4,11 +4,10 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const app = express();
-
 const authRouter = require("./routes/authRouter");
 const departAdminRouter = require("./routes/departAdminRouter");
-const DepartmentNameRouter = require("./routes/DepartmentNameRouter");
-const benifitsRouter = require("./routes/bonusses");
+const DepartmentNameRouter = require("./routes/departNameRouter");
+const benifitsRouter = require("./routes/bonusRouter");
 
 require('dotenv').config();
 const PORT = process.env.PORT || 5000;
