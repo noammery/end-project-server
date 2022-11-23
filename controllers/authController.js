@@ -24,7 +24,7 @@ class authController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: "Validation error", errors })
       }
-      console.log(req.body);
+      // console.log(req.body);
       const {
         email,
         password,
@@ -93,18 +93,6 @@ class authController {
         return res.status(400).json({ message: `Invalid password` });
       }
       const token = generateAccessToken(user.email, user.role, user.fullname);
-
-      //   const {
-      //     role,
-      //     fullname,
-      //     phone,
-      //     birthday,
-      //     department,
-      //     sex,
-      //     image,
-      //     contract,
-      //     adress,
-      //   } = user;
 
       return res.json({
         token,

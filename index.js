@@ -1,17 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const http = require("http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+const app = express();
+
 const authRouter = require("./routes/authRouter");
 const departAdminRouter = require("./routes/departAdminRouter");
 const DepartmentNameRouter = require("./routes/DepartmentNameRouter");
-const app = express();
-const http = require("http");
-const { Server } = require("socket.io");
-require('dotenv').config()
-
-const cors = require("cors");
 const benifitsRouter = require("./routes/bonusses");
+
+require('dotenv').config();
 const PORT = process.env.PORT || 5000;
-const User = require("./models/User");
 
 
 app.use(cors());

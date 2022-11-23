@@ -11,13 +11,13 @@ module.exports = function (roles) {
             if (!token) {
                 return res.status(403).json({ message: "User is not authorized" })
             }
-            const { roles: userRoles } = jwt.verify(token, process.env.SECRET)
+            const decodedData = jwt.verify(token, process.env.SECRET)
             let hasRole = false
-            userRoles.forEach(role => {
-                if (roles.includes(role)) {
-                    hasRole = true
-                }
-            })
+
+            if (roles.includes(decodedData.role)) {
+                hasRole = true
+            }
+
             if (!hasRole) {
                 return res.status(403).json({ message: "Access is not permitted" })
             }
