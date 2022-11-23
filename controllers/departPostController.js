@@ -49,19 +49,8 @@ class DepartmentPostsController {
   }
 
   async getPost(req, res) {
-    try {
-      const errors = validationResult(req);
-
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "שגיאה!", error });
-      }
-
-      const departmentPost = await DepartmentPost.find();
-      res.send(departmentPost);
-    } catch (e) {
-      console.log(e);
-      res.status(400).json({ message: "שגיאה" });
-    }
+    const departmentPost = await DepartmentPost.find();
+    departmentPost ? res.send(departmentPost) : res.send("אין פוסטים");
   }
 
   async getSpecificPosts(req, res) {
