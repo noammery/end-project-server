@@ -22,7 +22,7 @@ This is the server side repository. [to the client repository](https://github.co
 
 
 ## Screenshot
- <p align="center"><img src="https://github.com/noammery/end-project-client/blob/master/src/images/screenshot2.png" width="300" /></p>
+ <p align="center"><img src="https://github.com/noammery/end-project-client/blob/master/src/images/screenshot3.png" width="300" /></p>
 
 
 ## Technologies:
