@@ -16,17 +16,7 @@ router.post(
   controller.createPost
 );
 
-router.post(
-  "/get",
-  [
-    check("department", "cant be empty").notEmpty(),
-    check("title", "cant be empty").notEmpty(),
-    check("description", "cant be empty").notEmpty(),
-    check("date", "cant be empty").notEmpty(),
-    check("image", "only images files").notEmpty(),
-  ],
-  controller.getPost
-);
+router.post("/get", controller.getPost);
 
 router.post("/data", controller.getSpecificPosts);
 
