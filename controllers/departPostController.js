@@ -53,7 +53,7 @@ class DepartmentPostsController {
       const errors = validationResult(req);
 
       if (!errors.isEmpty()) {
-        return res.status(400).json({ message: "שגיאה!", error });
+        return res.status(400).json({ message: "שגיאה!", errors });
       }
 
       const departmentPost = await DepartmentPost.find();
